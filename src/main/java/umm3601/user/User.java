@@ -1,9 +1,9 @@
-package umm3601.user;
+package umm3601.todo;
 
 public class User {
   String _id;
-  String name;
-  int age;
-  String company;
-  String email;
+  String owner;
+  boolean status;
+  String body;
+  String category;
 }

@@ -18,15 +18,41 @@ import java.util.Map;
 public class Database {
 
   private User[] allUsers;
+  private Todo[] allTodos;
 
   public Database(String userDataFile) throws IOException {
     Gson gson = new Gson();
     FileReader reader = new FileReader(userDataFile);
     allUsers = gson.fromJson(reader, User[].class);
+    allTodos = gson.fromJson(reader, Todo[].class);
   }
 
   /**
    * Get the single user specified by the given ID. Return
+   * `null` if there is no user with that ID.
+   *
+   * @param id the ID of the desired user
+   * @return the user with the given ID, or null if there is no user
+   * with that ID
+   */
+  public User getUser(String id) {
+    return Arrays.stream(allUsers).filter(x -> x._id.equals(id)).findFirst().orElse(null);
+  }
+
+  /**
+   * Get a single todo specified by the given ID. Return
+   * `null` if there is no todo with that ID.
+   *
+   * @param id the ID of the desired todo
+   * @return the user with the given ID, or null if there is no todo
+   * with that ID
+   */
+  public Todo getTodo(String id) {
+    return Arrays.stream(allTodos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
+  }
+
+  /**
+   * Get a single user specified by the given ID. Return
    * `null` if there is no user with that ID.
    *
    * @param id the ID of the desired user
@@ -55,6 +81,8 @@ public class Database {
 
     return filteredUsers;
   }
+
+  public Todo[] listTodos(Map<String, String[]> queryParams)
 
   /**
    * Get an array of all the users having the target age.
