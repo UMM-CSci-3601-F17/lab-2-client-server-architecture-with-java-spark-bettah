@@ -20,11 +20,20 @@ public class Database {
   private User[] allUsers;
   private Todo[] allTodos;
 
-  public Database(String userDataFile) throws IOException {
+  public Database(String dataFile) throws IOException {
     Gson gson = new Gson();
-    FileReader reader = new FileReader(userDataFile);
-    allUsers = gson.fromJson(reader, User[].class);
-    allTodos = gson.fromJson(reader, Todo[].class);
+    FileReader reader = new FileReader(dataFile);
+
+    if (dataFile.contains("todos")) {
+      allTodos = gson.fromJson(reader, Todo[].class);
+    }
+    else if(dataFile.contains("users")) {
+      allUsers = gson.fromJson(reader, User[].class);
+    }
+    else{
+      System.out.println(dataFile);
+      throw new IOException("File specified in database constructor not understood");
+    }
   }
 
   /**
@@ -76,11 +85,12 @@ public class Database {
    * @param queryParams map of all the required key-value pairs for the query
    * @return an array of all users matching the given criteria
    */
-  protected Todo[] listTodos(Map<String, String[]> queryParams) {
+  public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
 
-    // Filter age if defined
-    if (queryParams.containsKey("_id")) {
+
+    // Filter status if defined
+    if (queryParams.containsKey("status")) {
       Boolean targetStatus = Boolean.parseBoolean(queryParams.get("status")[0]);
       filteredTodos = filterTodosByStatus(filteredTodos, targetStatus);
     }
