@@ -1,18 +1,16 @@
-package umm3601.todo;
+package umm3601.entries;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
 
-import java.io.IOException;
-
 import static umm3601.Util.*;
 
 /**
  * Controller that manages requests for info about users.
  */
-public class TodosController {
+public class UserController {
 
   private final Gson gson;
   private Database database;
@@ -26,25 +24,25 @@ public class TodosController {
    *
    * @param database the database containing user data
    */
-  public TodosController(Database database) {
+  public UserController(Database database) {
     gson = new Gson();
     this.database = database;
   }
 
   /**
-   * Get the single todo specified by the `id` parameter in the request.
+   * Get the single user specified by the `id` parameter in the request.
    *
    * @param req the HTTP request
    * @param res the HTTP response
    * @return a success JSON object if the user with that ID is found, a fail
    * JSON object if no user with that ID is found
    */
-  public JsonObject getTodo(Request req, Response res) {
+  public JsonObject getUser(Request req, Response res) {
     res.type("application/json");
     String id = req.params("id");
-    Todo todo = database.getTodo(id);
-    if (todo != null) {
-      return buildSuccessJsonResponse("todo", gson.toJsonTree(todo));
+    User user = database.getUser(id);
+    if (user != null) {
+      return buildSuccessJsonResponse("user", gson.toJsonTree(user));
     } else {
       String message = "User with ID " + id + " wasn't found.";
       return buildFailJsonResponse("id", message);
@@ -52,16 +50,16 @@ public class TodosController {
   }
 
   /**
-   * Get a JSON response with a list of all the todos in the "database".
+   * Get a JSON response with a list of all the users in the "database".
    *
    * @param req the HTTP request
    * @param res the HTTP response
    * @return a success JSON object containing all the users
    */
-  public JsonObject getTodos(Request req, Response res) {
+  public JsonObject getUsers(Request req, Response res) {
     res.type("application/json");
-    Todo[] todos = database.listTodos(req.queryMap().toMap());
-    return buildSuccessJsonResponse("todos", gson.toJsonTree(users));
+    User[] users = database.listUsers(req.queryMap().toMap());
+    return buildSuccessJsonResponse("users", gson.toJsonTree(users));
   }
 
 }

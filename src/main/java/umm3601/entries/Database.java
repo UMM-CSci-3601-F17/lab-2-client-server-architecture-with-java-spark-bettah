@@ -1,4 +1,4 @@
-package umm3601.user;
+package umm3601.entries;
 
 import com.google.gson.Gson;
 
@@ -40,28 +40,17 @@ public class Database {
   }
 
   /**
-   * Get a single todo specified by the given ID. Return
-   * `null` if there is no todo with that ID.
+   * Get a single entries specified by the given ID. Return
+   * `null` if there is no entries with that ID.
    *
-   * @param id the ID of the desired todo
-   * @return the user with the given ID, or null if there is no todo
+   * @param id the ID of the desired entries
+   * @return the user with the given ID, or null if there is no entries
    * with that ID
    */
   public Todo getTodo(String id) {
     return Arrays.stream(allTodos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
   }
 
-  /**
-   * Get a single user specified by the given ID. Return
-   * `null` if there is no user with that ID.
-   *
-   * @param id the ID of the desired user
-   * @return the user with the given ID, or null if there is no user
-   * with that ID
-   */
-  public User getUser(String id) {
-    return Arrays.stream(allUsers).filter(x -> x._id.equals(id)).findFirst().orElse(null);
-  }
 
   /**
    * Get an array of all the users satisfying the queries in the params.
@@ -82,7 +71,22 @@ public class Database {
     return filteredUsers;
   }
 
-  public Todo[] listTodos(Map<String, String[]> queryParams)
+  /**
+   *  Get an array of all the todos satisfying the queries in the params
+   * @param queryParams map of all the required key-value pairs for the query
+   * @return an array of all users matching the given criteria
+   */
+  protected Todo[] listTodos(Map<String, String[]> queryParams) {
+    Todo[] filteredTodos = allTodos;
+
+    // Filter age if defined
+    if (queryParams.containsKey("_id")) {
+      Boolean targetStatus = Boolean.parseBoolean(queryParams.get("status")[0]);
+      filteredTodos = filterTodosByStatus(filteredTodos, targetStatus);
+    }
+
+    return filteredTodos;
+  }
 
   /**
    * Get an array of all the users having the target age.
@@ -94,6 +98,16 @@ public class Database {
    */
   public User[] filterUsersByAge(User[] users, int targetAge) {
     return Arrays.stream(users).filter(x -> x.age == targetAge).toArray(User[]::new);
+  }
+
+  /**
+   * Get an array of all todos having the target status
+   * @param todos the list of todos to filter for
+   * @param targetStatus an array of all todos that have that status
+   * @return an array of all todos from the given list that have the target status
+   */
+  public Todo[] filterTodosByStatus(Todo[] todos, boolean targetStatus){
+    return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(Todo[]::new);
   }
 
 }

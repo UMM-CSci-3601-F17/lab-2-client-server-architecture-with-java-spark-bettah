@@ -1,6 +1,8 @@
 package umm3601.user;
 
 import org.junit.Test;
+import umm3601.entries.User;
+import umm3601.entries.Database;
 
 import java.io.IOException;
 

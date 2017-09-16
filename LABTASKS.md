@@ -68,7 +68,7 @@ we'll just refer to this as the `public` folder.
 :question: *2* Explain what a _route_ is.
 
 :question: *3* What is the purpose of `umm3601.Server` class?
-What is the purpose of the `umm3601.user.UserController` class?
+What is the purpose of the `umm3601.entries.UserController` class?
 Explain what happens when a user accesses each of the
 following URLs:
 - :question: The page `users`
