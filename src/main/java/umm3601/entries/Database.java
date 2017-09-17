@@ -105,9 +105,15 @@ public class Database {
       filteredTodos = filterTodosByContent(filteredTodos, targetContent);
     }
 
+    // Filter owner if defined
     if (queryParams.containsKey("owner")) {
       String targetOwner = queryParams.get("owner")[0];
       filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
+    }
+    // Limit remaining todos if defined
+    if (queryParams.containsKey("limit")) {
+      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredTodos = limitTodos(filteredTodos, targetLimit);
     }
 
     return filteredTodos;
@@ -161,11 +167,44 @@ public class Database {
 
   /**
    * Get an array of all the users having the target owner
+   *
    * @param todos       the list of todos to filter from
    * @param targetOwner an owner to look for
    * @return an array of all todos that have the target owner
    */
   public Todo[] filterTodosByOwner(Todo[] todos, String targetOwner) {
     return Arrays.stream(todos).filter(x -> x.owner.contains(targetOwner)).toArray(Todo[]::new);
+  }
+
+  /**
+   * Get an array of Todos of length that is limited by the target limit
+   *
+   * @param todos
+   * @param targetLimit
+   * @return an array of todos with targetLimit length
+   */
+  public Todo[] limitTodos(Todo[] todos, int targetLimit) {
+
+    if (targetLimit < 0) {
+      targetLimit = 0;
+    }
+
+    Todo[] limitedTodos = new Todo[targetLimit];
+
+    if (targetLimit < 1) {
+
+      return limitedTodos;
+
+    } else if (targetLimit > todos.length) {
+
+      return todos;
+
+    } else {
+
+      for (int i = 0; i < targetLimit; i++) {
+        limitedTodos[i] = todos[i];
+      }
+      return limitedTodos;
+    }
   }
 }
