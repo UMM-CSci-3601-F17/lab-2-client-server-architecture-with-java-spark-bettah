@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class FilterTodoByOwnerFromDB {
 
   @Test
-  public void  filterTodosByOwner() throws IOException {
+  public void filterTodosByOwner() throws IOException {
     Database db = new Database("src/main/data/todos.json");
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
@@ -30,11 +30,11 @@ public class FilterTodoByOwnerFromDB {
     Database db = new Database("src/main/data/todos.json");
     Map<String, String[]> queryParams = new HashMap<>();
 
-    queryParams.put("owner", new String[] {"Barry"});
+    queryParams.put("owner", new String[]{"Barry"});
     Todo[] ownerBarryTodos = db.listTodos(queryParams);
     assertEquals("Incorrect number of todos for owner Barry", 51, ownerBarryTodos.length);
 
-    queryParams.put("owner", new String[] {"Dawn"});
+    queryParams.put("owner", new String[]{"Dawn"});
     Todo[] ownerDawnTodos = db.listTodos(queryParams);
     assertEquals("Incorrect number of todos for owner Dawn", 50, ownerDawnTodos.length);
   }
