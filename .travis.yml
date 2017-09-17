@@ -10,6 +10,11 @@ cache:
     - $HOME/.gradle/wrapper/
 jdk:
   - oraclejdk8
+
+#Trying this out
+notifications:
+    slack: umm-3601-f17:2kpFppXUnwWZ18hk0FkUnqVw
+
 #sudo: false
 #addons:
 #  apt:
