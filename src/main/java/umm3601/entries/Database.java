@@ -101,7 +101,11 @@ public class Database {
       filteredTodos = filterTodosByCategory(filteredTodos, targetCategory);
     }
 
-
+    // Filter content if defined
+    if (queryParams.containsKey("content")) {
+      String targetContent = queryParams.get("content")[0];
+      filteredTodos = filterTodosByContent(filteredTodos, targetContent);
+    }
 
     return filteredTodos;
   }
@@ -136,5 +140,15 @@ public class Database {
    */
   public Todo[] filterTodosByCategory(Todo[] todos, String targetCategory) {
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
+  }
+
+  /**
+   * Get an array of all todos having the target content
+   * @param todos the list of todos to filter from
+   * @param targetContent a content string to look for in the bodies
+   * @return an array of all todos form the list that have that content in their bodies
+   */
+  public Todo[] filterTodosByContent(Todo[] todos, String targetContent) {
+    return Arrays.stream(todos).filter(x -> x.body.contains(targetContent)).toArray(Todo[]::new);
   }
 }
