@@ -29,6 +29,9 @@ gradle-app.setting
 
 **/.idea/modules/*.iml
 
+#this also should be ignored.
+lab-2-client-server-architecture-with-java-spark-bettah.iml
+
 # They encourage you to commit some files in `.idea`, but
 # that seems to really pollute the project with IDEA specific
 # files, which isn't cool. So for now we're going to ignore
