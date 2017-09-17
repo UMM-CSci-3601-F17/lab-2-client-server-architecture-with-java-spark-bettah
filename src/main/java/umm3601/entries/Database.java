@@ -128,6 +128,12 @@ public class Database {
     return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(Todo[]::new);
   }
 
+  /**
+   * Get an array of all todos having the target category
+   * @param todos the list of todos to filter from
+   * @param targetCategory a category to look for
+   * @return an array of all todos form the list that have that category
+   */
   public Todo[] filterTodosByCategory(Todo[] todos, String targetCategory) {
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
   }
