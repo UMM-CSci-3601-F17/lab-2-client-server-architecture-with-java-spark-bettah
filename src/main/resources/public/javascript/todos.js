@@ -7,6 +7,35 @@ function getAllTodos() {
   });
 }
 
+function getFilteredTodos() {
+  console.log("Sending request for filtered todos.");
+  var url = "/api/todos?";
+  var HttpThingy2 = new HttpClient();
+
+  //string building ifs
+
+  //Handle status
+  if(document.getElementById("status").value != ""){
+    url += "status=" + document.getElementById("status").value;
+  }
+
+  //handle content
+  if(document.getElementById("content").value != ""){
+    url += "&content=" + document.getElementById("content").value;
+  }
+
+
+  if(url == "/api/todos?"){
+    url = "api/todos";
+  }
+  alert(url);
+  HttpThingy2.get(url, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+
+
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.

@@ -6,9 +6,25 @@
   <script type="text/javascript" src="javascript/todos.js"> </script>
 </head>
 <body>
-
+<a href="/index.html">HOME</a>
+<hr/>
 <button type="button" id="getAllTodos">All Todos</button>
+<hr/>
+<p>Sort by Status</p>
 
+<!--Thanks to Paul for inspiration /-->
+<select id="status">
+  <option value=""></option>
+  <option value="true">Complete</option>
+  <option value="false">Incomplete</option>
+</select>
+<hr/>
+<form>
+  Search todo body by keyword(s):<br>
+  <input id="content" type="text" content="key-words"><br>
+</form>
+<hr/>
+<button type="button" id="submit">Submit</button>
 <hr/>
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
@@ -19,7 +35,12 @@
 
     var e = document.getElementById('getAllTodos');
     e.addEventListener("click", getAllTodos, true);
+
+    console.log("Binding submission");
+    var element = document.getElementById("submit");
+    element.addEventListener("click", getFilteredTodos, true);
   }
+
 </script>
 </body>
 </html>
