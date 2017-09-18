@@ -1,10 +1,10 @@
 package umm3601.entries;
 
 import com.google.gson.Gson;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -15,7 +15,7 @@ import java.util.Map;
  * specified JSON file, and then provide various database-like
  * methods that allow the `UserController` to "query" the "database".
  */
-public class Database {
+public class Database{
 
   private User[] allUsers;
   private Todo[] allTodos;
@@ -116,6 +116,11 @@ public class Database {
       filteredTodos = limitTodos(filteredTodos, targetLimit);
     }
 
+    if (queryParams.containsKey("orderBy")) {
+      String targetOrder = queryParams.get("orderBy")[0];
+      filteredTodos = orderTodos(filteredTodos, targetOrder);
+    }
+
     return filteredTodos;
   }
 
@@ -207,4 +212,57 @@ public class Database {
       return limitedTodos;
     }
   }
+
+  /**
+   * Get an array of Todos which is sorted in decending order based on the given targetOrder
+   * @param todos
+   * @param targetOrder
+   * @return an array of todos sorted by targetOrder
+   */
+  public Todo[] orderTodos(Todo[] todos, String targetOrder) {
+
+    if (targetOrder.equals("owner")) {
+      Arrays.sort(todos, new ownerComparator());
+
+    } else if (targetOrder.equals("status")) {
+      Arrays.sort(todos, new statusComparator());
+
+    } else if (targetOrder.equals("body")) {
+      Arrays.sort(todos, new bodyComparator());
+
+    } else {
+      Arrays.sort(todos, new categoryComparator());
+    }
+    return todos;
+  }
+
+  // Todo comparator for owner property
+  public class ownerComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.owner.compareTo(o2.owner);
+    }
+  }
+  // Todo comparator for status property
+  public class statusComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return Boolean.compare(o1.status, o2.status);
+    }
+  }
+  // Todo comparator for body property
+  public class bodyComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.body.compareTo(o2.body);
+    }
+  }
+  // Todo comparator for category property
+  public class categoryComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.category.compareTo(o2.category);
+    }
+  }
+
 }
