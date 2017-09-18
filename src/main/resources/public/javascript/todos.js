@@ -1,16 +1,17 @@
 function getAllTodos() {
   console.log("Getting all the todos.");
 
-  var TodoThingy = new HttpClient();
-  TodoThingy.get("/api/todos", function(returned_json){
+  var todosClient = new HttpClient();
+  todosClient.get("/api/todos", function(returned_json){
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
 
+
 function getFilteredTodos() {
   console.log("Sending request for filtered todos.");
   var url = "/api/todos?";
-  var HttpThingy2 = new HttpClient();
+  var filteredTodoClient = new HttpClient();
 
   //string building ifs
 
@@ -24,14 +25,37 @@ function getFilteredTodos() {
     url += "&content=" + document.getElementById("content").value;
   }
 
+  //handle category
+  if(document.getElementById("category").value != ""){
+    url += "&category=" + document.getElementById("category").value;
+  }
 
+  //handle owner
+  if(document.getElementById("owner").value != ""){
+    url += "&owner=" + document.getElementById("owner").value;
+  }
+
+  //handle limit
+  if(document.getElementById("limit").value != ""){
+    url += "&limit=" + document.getElementById("limit").value;
+  }
+
+  //if we have nothing selected, make the url clean
   if(url == "/api/todos?"){
     url = "api/todos";
   }
-  alert(url);
-  HttpThingy2.get(url, function(returned_json){
+
+  filteredTodoClient.get(url, function(returned_json){
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
+}
+
+function clearFilters() {
+  document.getElementById("status").value = "";
+  document.getElementById("content").value = "";
+  document.getElementById("category").value = "";
+  document.getElementById("owner").value = "";
+  document.getElementById("limit").value = ""
 }
 
 

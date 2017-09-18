@@ -10,8 +10,8 @@
 <hr/>
 <button type="button" id="getAllTodos">All Todos</button>
 <hr/>
-<p>Sort by Status</p>
 
+<p>Sort by Status</p>
 <!--Thanks to Paul for inspiration /-->
 <select id="status">
   <option value=""></option>
@@ -19,13 +19,35 @@
   <option value="false">Incomplete</option>
 </select>
 <hr/>
+
 <form>
   Search todo body by keyword(s):<br>
   <input id="content" type="text" content="key-words"><br>
 </form>
 <hr/>
-<button type="button" id="submit">Submit</button>
+
+<form>
+  Search todo body by category:<br>
+  <input id="category" type="text" content="category"><br>
+</form>
 <hr/>
+
+<form>
+  Search todo body by owner:<br>
+  <input id="owner" type="text" content="owner"><br>
+</form>
+<hr/>
+
+<form>
+  Limit amount of results:<br>
+  <input id="limit" type="number" content="limit"><br>
+</form>
+<hr/>
+
+<button type="button" id="submit">Submit</button>
+<button type="button" id="clear">Clear Filters</button>
+<hr/>
+
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
 
@@ -33,12 +55,17 @@
   window.onload = function() {
     console.log("The todo page is loaded now!");
 
-    var e = document.getElementById('getAllTodos');
-    e.addEventListener("click", getAllTodos, true);
+    var todosbutton = document.getElementById('getAllTodos');
+    todosbutton.addEventListener("click", getAllTodos, true);
 
-    console.log("Binding submission");
-    var element = document.getElementById("submit");
-    element.addEventListener("click", getFilteredTodos, true);
+    console.log("Binding submission button");
+    var submitbutton = document.getElementById("submit");
+    submitbutton.addEventListener("click", getFilteredTodos, true);
+
+    console.log("Binding clear button");
+    var clearbutton = document.getElementById("clear");
+    clearbutton.addEventListener("click", clearFilters);
+    
   }
 
 </script>
