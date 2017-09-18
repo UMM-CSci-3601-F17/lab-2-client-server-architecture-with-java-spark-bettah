@@ -115,7 +115,7 @@ public class Database{
       int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, targetLimit);
     }
-
+    // Order by property if defined
     if (queryParams.containsKey("orderBy")) {
       String targetOrder = queryParams.get("orderBy")[0];
       filteredTodos = orderTodos(filteredTodos, targetOrder);
@@ -214,7 +214,7 @@ public class Database{
   }
 
   /**
-   * Get an array of Todos which is sorted in decending order based on the given targetOrder
+   * Get an array of Todos which is sorted in ascending order based on the given targetOrder
    * @param todos
    * @param targetOrder
    * @return an array of todos sorted by targetOrder
@@ -254,8 +254,7 @@ public class Database{
   public class bodyComparator implements Comparator<Todo> {
     @Override
     public int compare(Todo o1, Todo o2) {
-      return o1.body.compareTo(o2.body);
-    }
+      return o1.body.compareTo(o2.body); }
   }
   // Todo comparator for category property
   public class categoryComparator implements Comparator<Todo> {
