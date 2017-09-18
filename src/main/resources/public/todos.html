@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todos</title>
+  <script type="text/javascript" src="javascript/todos.js"> </script>
+</head>
+<body>
+
+<button type="button" id="getAllTodos">All Todos</button>
+
+<hr/>
+
+<div id="jsonDump" style="margin-top:20px"> Json will go here </div>
+
+<script>
+  window.onload = function() {
+    console.log("The todo page is loaded now!");
+
+    var e = document.getElementById('getAllTodos');
+    e.addEventListener("click", getAllTodos, true);
+  }
+</script>
+</body>
+</html>
