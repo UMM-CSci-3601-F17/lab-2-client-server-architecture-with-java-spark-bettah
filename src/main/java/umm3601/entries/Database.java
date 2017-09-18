@@ -26,11 +26,9 @@ public class Database {
 
     if (dataFile.contains("todos")) {
       allTodos = gson.fromJson(reader, Todo[].class);
-    }
-    else if(dataFile.contains("users")) {
+    } else if (dataFile.contains("users")) {
       allUsers = gson.fromJson(reader, User[].class);
-    }
-    else{
+    } else {
       System.out.println(dataFile);
       throw new IOException("File specified in database constructor not understood");
     }
@@ -71,7 +69,7 @@ public class Database {
     User[] filteredUsers = allUsers;
 
     // Filter age if defined
-    if(queryParams.containsKey("age")) {
+    if (queryParams.containsKey("age")) {
       int targetAge = Integer.parseInt(queryParams.get("age")[0]);
       filteredUsers = filterUsersByAge(filteredUsers, targetAge);
     }
@@ -81,13 +79,13 @@ public class Database {
   }
 
   /**
-   *  Get an array of all the todos satisfying the queries in the params
+   * Get an array of all the todos satisfying the queries in the params
+   *
    * @param queryParams map of all the required key-value pairs for the query
    * @return an array of all users matching the given criteria
    */
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
-
 
     // Filter status if defined
     if (queryParams.containsKey("status")) {
@@ -107,13 +105,25 @@ public class Database {
       filteredTodos = filterTodosByContent(filteredTodos, targetContent);
     }
 
+    // Filter owner if defined
+    if (queryParams.containsKey("owner")) {
+      String targetOwner = queryParams.get("owner")[0];
+      filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
+    }
+    // Limit remaining todos if defined
+    if (queryParams.containsKey("limit")) {
+      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredTodos = limitTodos(filteredTodos, targetLimit);
+    }
+
     return filteredTodos;
   }
+
 
   /**
    * Get an array of all the users having the target age.
    *
-   * @param users the list of users to filter by age
+   * @param users     the list of users to filter by age
    * @param targetAge the target age to look for
    * @return an array of all the users from the given list that have
    * the target age
@@ -124,17 +134,19 @@ public class Database {
 
   /**
    * Get an array of all todos having the target status
-   * @param todos the list of todos to filter for
+   *
+   * @param todos        the list of todos to filter for
    * @param targetStatus an array of all todos that have that status
    * @return an array of all todos from the given list that have the target status
    */
-  public Todo[] filterTodosByStatus(Todo[] todos, boolean targetStatus){
+  public Todo[] filterTodosByStatus(Todo[] todos, boolean targetStatus) {
     return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(Todo[]::new);
   }
 
   /**
    * Get an array of all todos having the target category
-   * @param todos the list of todos to filter from
+   *
+   * @param todos          the list of todos to filter from
    * @param targetCategory a category to look for
    * @return an array of all todos form the list that have that category
    */
@@ -144,11 +156,55 @@ public class Database {
 
   /**
    * Get an array of all todos having the target content
-   * @param todos the list of todos to filter from
+   *
+   * @param todos         the list of todos to filter from
    * @param targetContent a content string to look for in the bodies
    * @return an array of all todos form the list that have that content in their bodies
    */
   public Todo[] filterTodosByContent(Todo[] todos, String targetContent) {
     return Arrays.stream(todos).filter(x -> x.body.contains(targetContent)).toArray(Todo[]::new);
+  }
+
+  /**
+   * Get an array of all the users having the target owner
+   *
+   * @param todos       the list of todos to filter from
+   * @param targetOwner an owner to look for
+   * @return an array of all todos that have the target owner
+   */
+  public Todo[] filterTodosByOwner(Todo[] todos, String targetOwner) {
+    return Arrays.stream(todos).filter(x -> x.owner.contains(targetOwner)).toArray(Todo[]::new);
+  }
+
+  /**
+   * Get an array of Todos of length that is limited by the target limit
+   *
+   * @param todos
+   * @param targetLimit
+   * @return an array of todos with targetLimit length
+   */
+  public Todo[] limitTodos(Todo[] todos, int targetLimit) {
+
+    if (targetLimit < 0) {
+      targetLimit = 0;
+    }
+
+    Todo[] limitedTodos = new Todo[targetLimit];
+
+    if (targetLimit < 1) {
+
+      return limitedTodos;
+
+    } else if (targetLimit > todos.length) {
+
+      return todos;
+
+    } else {
+
+      for (int i = 0; i < targetLimit; i++) {
+        limitedTodos[i] = todos[i];
+      }
+      return limitedTodos;
+    }
   }
 }
