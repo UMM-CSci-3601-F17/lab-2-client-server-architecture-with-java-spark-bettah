@@ -2,7 +2,6 @@ package umm3601.todo;
 
 import org.junit.Test;
 import umm3601.entries.Todo;
-import umm3601.entries.User;
 import umm3601.entries.Database;
 
 import java.io.IOException;

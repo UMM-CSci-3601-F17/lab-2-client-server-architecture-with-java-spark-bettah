@@ -20,7 +20,7 @@ public class TodoController {
   /**
    * Construct a controller for todos.
    *
-   * This loads the "database" of user info from a JSON file and
+   * This loads the "database" of todo info from a JSON file and
    * stores that internally so that (subsets of) todos can be returned
    * in response to requests.
    *

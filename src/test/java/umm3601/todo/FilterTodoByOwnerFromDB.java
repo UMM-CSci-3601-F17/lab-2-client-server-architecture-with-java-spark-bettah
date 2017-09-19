@@ -19,10 +19,10 @@ public class FilterTodoByOwnerFromDB {
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
     Todo[] ownerBarryTodos = db.filterTodosByOwner(allTodos, "Barry");
-    assertEquals("Incorrect number of users for owner Barry", 51, ownerBarryTodos.length);
+    assertEquals("Incorrect number of todos for owner Barry", 51, ownerBarryTodos.length);
 
     Todo[] ownerDawnTodos = db.filterTodosByOwner(allTodos, "Dawn");
-    assertEquals("Incorrect number of users for ownwer Dawn", 50, ownerDawnTodos.length);
+    assertEquals("Incorrect number of todos for ownwer Dawn", 50, ownerDawnTodos.length);
   }
 
   @Test

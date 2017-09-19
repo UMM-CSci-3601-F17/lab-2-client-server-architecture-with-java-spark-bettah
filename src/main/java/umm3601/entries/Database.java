@@ -51,7 +51,7 @@ public class Database{
    * `null` if there is no entries with that ID.
    *
    * @param id the ID of the desired entries
-   * @return the user with the given ID, or null if there is no entries
+   * @return the todo with the given ID, or null if there is no entries
    * with that ID
    */
   public Todo getTodo(String id) {
@@ -82,7 +82,7 @@ public class Database{
    * Get an array of all the todos satisfying the queries in the params
    *
    * @param queryParams map of all the required key-value pairs for the query
-   * @return an array of all users matching the given criteria
+   * @return an array of all todos matching the given criteria
    */
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
@@ -171,7 +171,7 @@ public class Database{
   }
 
   /**
-   * Get an array of all the users having the target owner
+   * Get an array of all the todos having the target owner
    *
    * @param todos       the list of todos to filter from
    * @param targetOwner an owner to look for

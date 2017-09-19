@@ -29,7 +29,7 @@ public class FilterTodosByStatusFromDB {
   }
 
   @Test
-  public void listtodosWithAgeFilter() throws IOException {
+  public void listtodosWithStatusFilter() throws IOException {
     Database db = new Database("src/main/data/todos.json");
     Map<String, String[]> queryParams = new HashMap<>();
 
