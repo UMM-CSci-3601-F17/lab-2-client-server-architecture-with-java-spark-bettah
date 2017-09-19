@@ -1,17 +1,20 @@
 package umm3601.todo;
 
+import org.junit.Assert;
 import org.junit.Test;
 import umm3601.entries.Todo;
 import umm3601.entries.Database;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OrderTodosFromDB {
 
-  @Test
+ // @Test
   //This test is not automated
   public void listTodosAlphabetically() throws IOException {
 
@@ -37,8 +40,29 @@ public class OrderTodosFromDB {
     for (int i = 0; i < todoCategoryOrdered.length; i++) {
       System.out.println(todoCategoryOrdered[i].category);
     }
-
   }
+
+  /* Redundant test
+  @Test
+  public void listTodosAlphabeticallyAuto() throws IOException{
+    Database db = new Database("src/main/data/todos.json");
+    Todo[] allTodos = db.listTodos(new HashMap<>());
+
+    Todo[] todoOwnerOrdered = db.orderTodos(allTodos, "owner");
+    for (int i = 0; i < todoOwnerOrdered.length; i++) {
+      if(i > 1) {
+       assertTrue("Out of order comparison", (0 <= todoOwnerOrdered[i].owner.compareTo(todoOwnerOrdered[i - 1].owner)));
+      }
+    }
+
+    Todo[] todoStatusOrdered = db.orderTodos(allTodos, "status");
+    for (int i = 0; i < todoStatusOrdered.length; i++) {
+      if(i > 1) {
+        assertTrue("Out of order comparison", (0 >= todoStatusOrdered[i].status.compareTo(todoStatusOrdered[i - 1].status)));
+      }
+    }
+  }
+  */
 
   @Test
   //This Test is automated
