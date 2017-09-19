@@ -14,7 +14,7 @@
 <hr>
 <h3>Filter your search:</h3>
 <hr/>
-<p>Sort by Status</p>
+<p>Filter by Status</p>
 <!--Thanks to Paul for inspiration /-->
 <select id="status">
   <option value=""></option>
@@ -23,15 +23,15 @@
 </select>
 <hr/>
 
-<p>Search by key-word:</p>
+<p>Filter by key-word:</p>
 <input id="content" type="text" content="key-words">
 <hr/>
 
-<p>Search by category:</p>
+<p>Filter by category:</p>
 <input class="textbox" id="category" type="text" content="category">
 <hr/>
 
-<p>Search by owner:</p>
+<p>Filter by owner:</p>
 <input class="textbox" id="owner" type="text" content="owner">
 <hr/>
 
@@ -46,6 +46,12 @@
 <button type="button" id="clear">Clear Filters</button>
 <button type="button" id="getAllTodos">Get all Todos</button>
 <hr/>
+<button type="button" id="getByID" >Direct search by ID</button>
+<input class="textbox" id="uuid" type="text" content="owner">
+
+
+
+<hr/>
 <h3>Results:</h3>
 <hr/>
 
@@ -57,6 +63,10 @@
 
     var todosbutton = document.getElementById('getAllTodos');
     todosbutton.addEventListener("click", getAllTodos, true);
+
+
+    var idSearch = document.getElementById('getByID');
+    idSearch.addEventListener("click",getSingleTodo,true);
 
     console.log("Binding submission button");
     var submitbutton = document.getElementById("submit");
