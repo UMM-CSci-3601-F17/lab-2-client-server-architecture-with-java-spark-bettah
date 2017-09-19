@@ -25,6 +25,12 @@ function getFilteredTodos() {
     url += "&content=" + document.getElementById("content").value;
   }
 
+  //handle content
+  if(document.getElementById("id").value != ""){
+    url += "&id=" + document.getElementById("id").value;
+  }
+
+
   //handle category
   if(document.getElementById("category").value != ""){
     url += "&category=" + document.getElementById("category").value;
@@ -45,6 +51,7 @@ function getFilteredTodos() {
     url = "api/todos";
   }
 
+  alert(url);
   filteredTodoClient.get(url, function(returned_json){
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
