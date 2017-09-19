@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todos</title>
+  <script type="text/javascript" src="javascript/todos.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<a class="button" href="/index.html">HOME</a>
+<a class="button" href="/about">ABOUT</a>
+<a class="button" href="/users">USERS</a>
+<a class="button" href="/todos.html">TODOS</a>
+<hr>
+<h3>Filter your search:</h3>
+<hr/>
+<p>Sort by Status</p>
+<!--Thanks to Paul for inspiration /-->
+<select id="status">
+  <option value=""></option>
+  <option value="true">Complete</option>
+  <option value="false">Incomplete</option>
+</select>
+<hr/>
+
+<p>Search by key-word:</p>
+<input id="content" type="text" content="key-words">
+<hr/>
+
+<p>Search by category:</p>
+<input class="textbox" id="category" type="text" content="category">
+<hr/>
+
+<p>Search by owner:</p>
+<input class="textbox" id="owner" type="text" content="owner">
+<hr/>
+
+
+<form>
+  Limit amount of results:<br>
+  <input id="limit" type="number" content="limit"><br>
+</form>
+<hr/>
+
+<button type="button" id="submit">Submit</button>
+<button type="button" id="clear">Clear Filters</button>
+<button type="button" id="getAllTodos">Get all Todos</button>
+<hr/>
+<h3>Results:</h3>
+<hr/>
+
+<div id="jsonDump" style="margin-top:20px"></div>
+
+<script>
+  window.onload = function () {
+    console.log("The todo page is loaded now!");
+
+    var todosbutton = document.getElementById('getAllTodos');
+    todosbutton.addEventListener("click", getAllTodos, true);
+
+    console.log("Binding submission button");
+    var submitbutton = document.getElementById("submit");
+    submitbutton.addEventListener("click", getFilteredTodos, true);
+
+    console.log("Binding clear button");
+    var clearbutton = document.getElementById("clear");
+    clearbutton.addEventListener("click", clearFilters);
+  }
+
+</script>
+</body>
+</html>

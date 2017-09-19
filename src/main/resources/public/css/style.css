@@ -1,0 +1,48 @@
+body {
+  background: #bbb7f5;
+  padding: 20px
+}
+
+.button {
+  background: grey;
+  color: whitesmoke;
+  text-decoration: none;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#button:hover {
+  background: whitesmoke;
+  color: grey;
+}
+
+button {
+  border-style: none;
+  background: grey;
+  color: whitesmoke;
+  text-decoration: none;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  font-family: Serif;
+  font-size: 12pt;
+}
+
+button:hover {
+  background: whitesmoke;
+  color: grey;
+}
+
+.textbox {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+

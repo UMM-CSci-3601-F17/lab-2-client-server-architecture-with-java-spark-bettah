@@ -37,11 +37,15 @@ public class Server {
     // Redirects to create simpler URLs
     redirect.get("/about", "/about.html");
     redirect.get("/users", "/users.html");
+    redirect.get("/todos", "/todos.html");
+
 
     // API endpoints
 
     // Get specific user
     get("api/users/:id", userController::getUser);
+    // Get specific user
+    get("api/todos/:id", todoController::getTodo);
     // List users, filtered using query parameters
     get("api/users", userController::getUsers);
     //get all todos

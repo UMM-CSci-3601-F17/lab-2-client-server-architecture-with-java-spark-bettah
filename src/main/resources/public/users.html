@@ -3,29 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Users</title>
-  <script type="text/javascript" src="javascript/users.js"> </script>
+  <script type="text/javascript" src="javascript/users.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
-  <button type="button" id="getAll">Get All Users</button>
+<a class="button" href="/index.html">HOME</a>
+<a class="button" href="/about">ABOUT</a>
+<a class="button" href="/users">USERS</a>
+<a class="button" href="/todos.html">TODOS</a>
+<hr>
+<h3>Search:</h3>
+<hr/>
+<button type="button" id="getAll">Get All Users</button>
+<hr/>
+age: <input id="age" type="text" name="age">
+<button type="button" id="getUsersByAge"> get users by age</button>
 
-  <hr/>
+<hr>
+<h3>Results:</h3>
+<hr/>
 
-  <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
 
-  age: <input id="age" type= "text" name="age">
-  <button type="button" id="getUsersByAge"> get users by age </button>
+<div id="jsonDump" style="margin-top:20px"></div>
 
-  <script>
-    window.onload = function() {
-      console.log("The page is loaded now!");
+<script>
+  window.onload = function () {
+    console.log("The page is loaded now!");
 
-      var element = document.getElementById('getAll');
-      element.addEventListener("click", getAllUsers, true);
+    var element = document.getElementById('getAll');
+    element.addEventListener("click", getAllUsers, true);
 
-      element = document.getElementById('getUsersByAge');
-      element.addEventListener("click", getAllUsersByAge, true);
-    }
-  </script>
+    element = document.getElementById('getUsersByAge');
+    element.addEventListener("click", getAllUsersByAge, true);
+  }
+</script>
 </body>
 </html>
