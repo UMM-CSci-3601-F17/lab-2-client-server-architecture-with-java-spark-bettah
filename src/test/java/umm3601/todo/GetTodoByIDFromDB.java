@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertEquals;
 public class GetTodoByIDFromDB{
 
   @Test
-  public void getBarryNisi() throws IOException {
+  public void getBarryTodos() throws IOException {
     Database db = new Database("src/main/data/todos.json");
     Todo todo = db.getTodo("588959856f0b82ee93cd93eb");
     assertEquals("Incorrect ID", "588959856f0b82ee93cd93eb", todo._id);
@@ -23,7 +23,7 @@ public class GetTodoByIDFromDB{
   }
 
   @Test
-  public void getFryOfficia() throws IOException {
+  public void getFryTodos() throws IOException {
     Database db = new Database("src/main/data/todos.json");
     Todo todo = db.getTodo("58895985c42605d9a2814c7d");
     assertEquals("Incorrect ID", "58895985c42605d9a2814c7d", todo._id);

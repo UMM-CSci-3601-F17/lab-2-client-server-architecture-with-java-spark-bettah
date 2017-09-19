@@ -51,7 +51,7 @@ public class Database{
    * `null` if there is no entries with that ID.
    *
    * @param id the ID of the desired entries
-   * @return the user with the given ID, or null if there is no entries
+   * @return the todo with the given ID, or null if there is no entries
    * with that ID
    */
   public Todo getTodo(String id) {
@@ -82,7 +82,7 @@ public class Database{
    * Get an array of all the todos satisfying the queries in the params
    *
    * @param queryParams map of all the required key-value pairs for the query
-   * @return an array of all users matching the given criteria
+   * @return an array of all todos matching the given criteria
    */
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
@@ -171,7 +171,7 @@ public class Database{
   }
 
   /**
-   * Get an array of all the users having the target owner
+   * Get an array of all the todos having the target owner
    *
    * @param todos       the list of todos to filter from
    * @param targetOwner an owner to look for
@@ -184,8 +184,8 @@ public class Database{
   /**
    * Get an array of Todos of length that is limited by the target limit
    *
-   * @param todos
-   * @param targetLimit
+   * @param todos: array of todos to limit
+   * @param targetLimit the maximum amount of todos to return
    * @return an array of todos with targetLimit length
    */
   public Todo[] limitTodos(Todo[] todos, int targetLimit) {
@@ -206,32 +206,35 @@ public class Database{
 
     } else {
 
-      for (int i = 0; i < targetLimit; i++) {
-        limitedTodos[i] = todos[i];
-      }
+      System.arraycopy(todos, 0, limitedTodos, 0, targetLimit);
       return limitedTodos;
     }
   }
 
   /**
    * Get an array of Todos which is sorted in ascending order based on the given targetOrder
-   * @param todos
-   * @param targetOrder
+   * @param todos the array of todos to sort
+   * @param targetOrder the field over which to sort the todos
    * @return an array of todos sorted by targetOrder
    */
   public Todo[] orderTodos(Todo[] todos, String targetOrder) {
 
-    if (targetOrder.equals("owner")) {
-      Arrays.sort(todos, new ownerComparator());
+    switch (targetOrder) {
+      case "owner":
+        Arrays.sort(todos, new ownerComparator());
 
-    } else if (targetOrder.equals("status")) {
-      Arrays.sort(todos, new statusComparator());
+        break;
+      case "status":
+        Arrays.sort(todos, new statusComparator());
 
-    } else if (targetOrder.equals("body")) {
-      Arrays.sort(todos, new bodyComparator());
+        break;
+      case "body":
+        Arrays.sort(todos, new bodyComparator());
 
-    } else {
-      Arrays.sort(todos, new categoryComparator());
+        break;
+      default:
+        Arrays.sort(todos, new categoryComparator());
+        break;
     }
     return todos;
   }

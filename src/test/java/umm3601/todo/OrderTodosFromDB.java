@@ -1,20 +1,24 @@
 package umm3601.todo;
 
-import org.junit.Assert;
 import org.junit.Test;
-import umm3601.entries.Todo;
 import umm3601.entries.Database;
+import umm3601.entries.Todo;
 
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class OrderTodosFromDB {
 
+
+
+  /**
+   * Tests umm3601.todo.Database orderTodos
+   * and listtodos with _order_ query parameters
+   */
  // @Test
+
   //This test is not automated
   public void listTodosAlphabetically() throws IOException {
 

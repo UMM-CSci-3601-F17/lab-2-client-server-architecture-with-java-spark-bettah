@@ -11,8 +11,8 @@ import java.util.Map;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Tests umm3601.todo.Database filtertodosByAge
- * and listtodos with _age_ query parameters
+ * Tests umm3601.todo.Database filterTodosByStatus
+ * and listtodos with _status_ query parameters
  */
 public class FilterTodosByStatusFromDB {
 
@@ -29,7 +29,7 @@ public class FilterTodosByStatusFromDB {
   }
 
   @Test
-  public void listtodosWithAgeFilter() throws IOException {
+  public void listtodosWithStatusFilter() throws IOException {
     Database db = new Database("src/main/data/todos.json");
     Map<String, String[]> queryParams = new HashMap<>();
 
