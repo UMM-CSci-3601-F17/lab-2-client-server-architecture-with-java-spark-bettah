@@ -11,8 +11,8 @@ import java.util.Map;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Tests umm3601.todo.Database filtertodosByAge
- * and listtodos with _age_ query parameters
+ * Tests umm3601.todo.Database filterTodosByStatus
+ * and listtodos with _status_ query parameters
  */
 public class FilterTodosByStatusFromDB {
 

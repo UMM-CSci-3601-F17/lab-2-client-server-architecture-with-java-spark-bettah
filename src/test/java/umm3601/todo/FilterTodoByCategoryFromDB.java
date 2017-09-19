@@ -11,7 +11,7 @@ import java.util.Map;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Tests umm3601.todo.Database filtertodosByCategory
+ * Tests umm3601.todo.Database filterTodosByCategory
  * and listtodos with _category_ query parameters
  */
 

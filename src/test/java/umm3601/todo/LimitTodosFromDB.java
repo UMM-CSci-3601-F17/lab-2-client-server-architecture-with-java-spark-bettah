@@ -3,13 +3,15 @@ package umm3601.todo;
 import org.junit.Test;
 import umm3601.entries.Todo;
 import umm3601.entries.Database;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * Tests umm3601.todo.Database LimitTodos
+ * and listtodos with _limit_ query parameters
+ */
 public class LimitTodosFromDB {
 
   @Test

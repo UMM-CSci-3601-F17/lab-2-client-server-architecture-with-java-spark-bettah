@@ -11,6 +11,10 @@ import static org.junit.Assert.assertEquals;
 
 public class OrderTodosFromDB {
 
+  /**
+   * Tests umm3601.todo.Database orderTodos
+   * and listtodos with _order_ query parameters
+   */
   @Test
   //This test is not automated
   public void listTodosAlphabetically() throws IOException {

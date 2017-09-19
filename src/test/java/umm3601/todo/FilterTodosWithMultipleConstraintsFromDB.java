@@ -10,6 +10,13 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests umm3601.todo.Database filterTodosByStatus,
+ * filterTodosByCategory, filterTodosByContent,
+ * filterTodosByOwner, limitTodos, orderTodos,
+ * and listtodos with multiple query parameters
+ */
+
 public class FilterTodosWithMultipleConstraintsFromDB {
 
 

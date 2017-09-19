@@ -1,15 +1,17 @@
 package umm3601.todo;
 
-
 import org.junit.Test;
 import umm3601.entries.Todo;
 import umm3601.entries.Database;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
+
+/**
+ * Tests umm3601.todo.Database filterTodosByOwner
+ * and listtodos with _owner_ query parameters
+ */
 
 public class FilterTodoByOwnerFromDB {
 
