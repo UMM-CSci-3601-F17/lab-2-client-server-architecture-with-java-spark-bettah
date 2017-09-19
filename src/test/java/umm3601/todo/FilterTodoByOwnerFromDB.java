@@ -1,15 +1,17 @@
 package umm3601.todo;
 
-
 import org.junit.Test;
 import umm3601.entries.Todo;
 import umm3601.entries.Database;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
+
+/**
+ * Tests umm3601.todo.Database filterTodosByOwner
+ * and listtodos with _owner_ query parameters
+ */
 
 public class FilterTodoByOwnerFromDB {
 
@@ -19,10 +21,10 @@ public class FilterTodoByOwnerFromDB {
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
     Todo[] ownerBarryTodos = db.filterTodosByOwner(allTodos, "Barry");
-    assertEquals("Incorrect number of users for owner Barry", 51, ownerBarryTodos.length);
+    assertEquals("Incorrect number of todos for owner Barry", 51, ownerBarryTodos.length);
 
     Todo[] ownerDawnTodos = db.filterTodosByOwner(allTodos, "Dawn");
-    assertEquals("Incorrect number of users for ownwer Dawn", 50, ownerDawnTodos.length);
+    assertEquals("Incorrect number of todos for ownwer Dawn", 50, ownerDawnTodos.length);
   }
 
   @Test

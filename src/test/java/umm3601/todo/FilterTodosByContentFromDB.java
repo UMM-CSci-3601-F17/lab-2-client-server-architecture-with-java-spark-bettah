@@ -10,6 +10,10 @@ import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * Tests umm3601.todo.Database filterTodosByContent
+ * and listtodos with _body_ query parameters
+ */
 public class FilterTodosByContentFromDB {
   @Test
   public void filterTodosByContent() throws IOException {

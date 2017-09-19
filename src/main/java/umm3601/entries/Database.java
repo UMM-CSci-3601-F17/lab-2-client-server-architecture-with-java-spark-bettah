@@ -1,10 +1,10 @@
 package umm3601.entries;
 
 import com.google.gson.Gson;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -15,7 +15,7 @@ import java.util.Map;
  * specified JSON file, and then provide various database-like
  * methods that allow the `UserController` to "query" the "database".
  */
-public class Database {
+public class Database{
 
   private User[] allUsers;
   private Todo[] allTodos;
@@ -51,7 +51,7 @@ public class Database {
    * `null` if there is no entries with that ID.
    *
    * @param id the ID of the desired entries
-   * @return the user with the given ID, or null if there is no entries
+   * @return the todo with the given ID, or null if there is no entries
    * with that ID
    */
   public Todo getTodo(String id) {
@@ -82,7 +82,7 @@ public class Database {
    * Get an array of all the todos satisfying the queries in the params
    *
    * @param queryParams map of all the required key-value pairs for the query
-   * @return an array of all users matching the given criteria
+   * @return an array of all todos matching the given criteria
    */
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
@@ -114,6 +114,11 @@ public class Database {
     if (queryParams.containsKey("limit")) {
       int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, targetLimit);
+    }
+    // Order by property if defined
+    if (queryParams.containsKey("orderBy")) {
+      String targetOrder = queryParams.get("orderBy")[0];
+      filteredTodos = orderTodos(filteredTodos, targetOrder);
     }
 
     return filteredTodos;
@@ -166,7 +171,7 @@ public class Database {
   }
 
   /**
-   * Get an array of all the users having the target owner
+   * Get an array of all the todos having the target owner
    *
    * @param todos       the list of todos to filter from
    * @param targetOwner an owner to look for
@@ -179,8 +184,8 @@ public class Database {
   /**
    * Get an array of Todos of length that is limited by the target limit
    *
-   * @param todos
-   * @param targetLimit
+   * @param todos: array of todos to limit
+   * @param targetLimit the maximum amount of todos to return
    * @return an array of todos with targetLimit length
    */
   public Todo[] limitTodos(Todo[] todos, int targetLimit) {
@@ -201,10 +206,65 @@ public class Database {
 
     } else {
 
-      for (int i = 0; i < targetLimit; i++) {
-        limitedTodos[i] = todos[i];
-      }
+      System.arraycopy(todos, 0, limitedTodos, 0, targetLimit);
       return limitedTodos;
     }
   }
+
+  /**
+   * Get an array of Todos which is sorted in ascending order based on the given targetOrder
+   * @param todos the array of todos to sort
+   * @param targetOrder the field over which to sort the todos
+   * @return an array of todos sorted by targetOrder
+   */
+  public Todo[] orderTodos(Todo[] todos, String targetOrder) {
+
+    switch (targetOrder) {
+      case "owner":
+        Arrays.sort(todos, new ownerComparator());
+
+        break;
+      case "status":
+        Arrays.sort(todos, new statusComparator());
+
+        break;
+      case "body":
+        Arrays.sort(todos, new bodyComparator());
+
+        break;
+      default:
+        Arrays.sort(todos, new categoryComparator());
+        break;
+    }
+    return todos;
+  }
+
+  // Todo comparator for owner property
+  public class ownerComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.owner.compareTo(o2.owner);
+    }
+  }
+  // Todo comparator for status property
+  public class statusComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return Boolean.compare(o1.status, o2.status);
+    }
+  }
+  // Todo comparator for body property
+  public class bodyComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.body.compareTo(o2.body); }
+  }
+  // Todo comparator for category property
+  public class categoryComparator implements Comparator<Todo> {
+    @Override
+    public int compare(Todo o1, Todo o2) {
+      return o1.category.compareTo(o2.category);
+    }
+  }
+
 }
